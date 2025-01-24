@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  openwrt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: openwrt
+    privileged: true
+    network_mode: "host" # Use host networking for simplicity
+    volumes:
+      - ./openwrt-config:/etc/config
+      - ./openwrt-openvpn:/etc/openvpn
+    environment:
+      - TZ=UTC # Set timezone, modify as needed
+    restart: always
+
+volumes:
+  openwrt-config:
+    driver: local
+  openwrt-openvpn:
+    driver: local
