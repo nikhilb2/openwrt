@@ -1,8 +1,9 @@
 # Use the OpenWrt rootfs image for x86_64
 FROM openwrt/rootfs:x86_64
 
-# Update and install required packages
-RUN opkg update && \
+# Create necessary directories and install required packages
+RUN mkdir -p /var/lock && \
+	opkg update && \
 	opkg install luci uhttpd openvpn-openssl iptables && \
 	mkdir -p /etc/config /etc/openvpn && \
 	opkg clean
